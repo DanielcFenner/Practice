@@ -36,10 +36,18 @@ int main(int argc, char *argv[])
     // TODO: Copy header from input file to output file
     uint8_t header[43];
     fread(header, 1, 44, input);
-    fwrite(header[0], 1, 44, output);
+    fwrite(&header[0], 1, 44, output);
     
 
     // TODO: Read samples from input file and write updated data to output file
+    fseek(input, 0, SEEK_END);
+    long size = ftell(input);
+    uint16_t restOfFile[size - 44];
+    for (int i = 44; i < size; i++)
+    {
+         
+    }
+    
 
     // Close files
     fclose(input);
