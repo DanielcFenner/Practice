@@ -1,0 +1,51 @@
+﻿<Window x:Class="practice_BeehiveControlOOPPractice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:practice_BeehiveControlOOPPractice"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="325" Width="625"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="15"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="Gilroy">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+           
+        
+        
+        
+    <TextBlock Text="Job Assignments" FontSize="20" Margin="20,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+
+    <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20">
+        <ComboBox x:Name="jobSelector" SelectedIndex="0" Margin="0,0,0,20">
+            <ListBoxItem Content="Nectar Collector"/>
+            <ListBoxItem Content="Honey Manufacturer"/>
+            <ListBoxItem Content="Egg Care"/>
+        </ComboBox>
+        <Button Content="Assign this job to a bee" Click="AssignJob_click" />
+    </StackPanel>
+
+    <Button x:Name="workButton" Grid.Row="2" Content="Work (Automatically every 1.5s)" VerticalAlignment="Bottom" Height="75" Click="WorkShift_Click" Margin="20"/>
+
+        <TextBlock Text="Queen's Report" FontSize="20" Grid.Column="1" Margin="20,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+
+        <TextBox x:Name="statusReport" IsReadOnly="True" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Margin="20"/>
+    </Grid>
+</Window>

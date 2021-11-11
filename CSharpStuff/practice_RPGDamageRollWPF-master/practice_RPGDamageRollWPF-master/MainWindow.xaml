@@ -1,0 +1,35 @@
+﻿<Window x:Class="practcing_RPGDamageRollWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:practcing_RPGDamageRollWPF"
+        mc:Ignorable="d"
+        Title="Sword Damage" Height="175" Width="300"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <CheckBox x:Name="flamingCheckBox" Grid.Row="0" Grid.Column="0" Content="Flaming" VerticalAlignment="center" HorizontalAlignment="Center" Checked="flamingCheckBox_Checked" Unchecked="flamingCheckBox_Unchecked"></CheckBox>
+        <CheckBox x:Name="magicCheckBox" Grid.Row="0" Grid.Column="1" Content="Magic" VerticalAlignment="center" HorizontalAlignment="Center" Checked="magicCheckBox_Checked" Unchecked="magicCheckBox_Unchecked"></CheckBox>
+        <Button x:Name="rollButton" Grid.Row="1" Grid.ColumnSpan="2" Content="Roll for damage" Click="rollButton_Click"></Button>
+        <TextBlock x:Name="damageOutputTextBlock" Grid.Row="2" Grid.ColumnSpan="2" Text="Roll the dice to find your damage" VerticalAlignment="center" HorizontalAlignment="Center"></TextBlock>
+
+    </Grid>
+</Window>
