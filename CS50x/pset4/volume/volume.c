@@ -40,13 +40,16 @@ int main(int argc, char *argv[])
     
 
     // TODO: Read samples from input file and write updated data to output file
-    fseek(input, 0, SEEK_END);
-    long size = ftell(input);
-    uint16_t restOfFile[size - 44];
-    for (int i = 44; i < size; i++)
+    output = fopen(argv[2], "a");
+    fseek(input, 0L, SEEK_END);
+    long int size = ftell(input);
+    uint16_t soundBytes[size];
+    for (int i = 0; i < size; i++)
     {
-         
+         if (i < 44) continue;
+         soundBytes[i] * 2;
     }
+    fwrite(soundBytes[0], 2, 44, output);
     
 
     // Close files
