@@ -34,25 +34,33 @@ int main(int argc, char *argv[])
     float factor = atof(argv[3]);
 
     // TODO: Copy header from input file to output file
-    uint8_t header[43];
+    uint8_t header[HEADER_SIZE];
     fread(header, 1, 44, input);
     fwrite(&header[0], 1, 44, output);
-    
+    fclose(output);
 
     // TODO: Read samples from input file and write updated data to output file
-    output = fopen(argv[2], "a");
+    FILE *outputAppend = fopen(argv[2], "a");
+    if (outputAppend == NULL)
+    {
+        printf("Could not open file.\n");
+        return 1;
+    }
+
     fseek(input, 0L, SEEK_END);
     long int size = ftell(input);
-    uint16_t soundBytes[size];
+    int16_t soundBytes[size];
+    int16_t soundBytesWithoutHeader[size - 44];
+    fread(soundBytes, 1, size, input);
     for (int i = 0; i < size; i++)
     {
          if (i < 44) continue;
-         soundBytes[i] * 2;
+         soundBytesWithoutHeader[i - 44] = soundBytes[i] * factor;
     }
-    fwrite(soundBytes[0], 2, 44, output);
+    fwrite(&soundBytesWithoutHeader[0], 1, size - 44, outputAppend);
     
 
     // Close files
     fclose(input);
-    fclose(output);
+    fclose(outputAppend);
 }
