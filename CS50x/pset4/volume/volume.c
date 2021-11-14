@@ -49,15 +49,20 @@ int main(int argc, char *argv[])
 
     fseek(input, 0L, SEEK_END);
     long int size = ftell(input);
+    fseek(input, 0, SEEK_SET);
     int16_t soundBytes[size];
-    int16_t soundBytesWithoutHeader[size - 44];
-    fread(soundBytes, 1, size, input);
+    int16_t soundBytesWithoutHeader[size - HEADER_SIZE];
+    fread(soundBytes, 2, size, input);
+
     for (int i = 0; i < size; i++)
     {
          if (i < 44) continue;
-         soundBytesWithoutHeader[i - 44] = soundBytes[i] * factor;
+         soundBytesWithoutHeader[i - HEADER_SIZE] = soundBytes[i] * factor;
     }
-    fwrite(&soundBytesWithoutHeader[0], 1, size - 44, outputAppend);
+    fwrite(&soundBytesWithoutHeader[0], 2, size - HEADER_SIZE, outputAppend);
+
+
+    
     
 
     // Close files
