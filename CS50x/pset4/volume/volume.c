@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 
     // TODO: Copy header from input file to output file
     uint8_t header[HEADER_SIZE];
-    fread(header, 1, 44, input);
-    fwrite(&header[0], 1, 44, output);
+    fread(header, 1, HEADER_SIZE, input);
+    fwrite(&header[0], 1, HEADER_SIZE, output);
     fclose(output);
 
     // TODO: Read samples from input file and write updated data to output file
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
          if (i < 44) continue;
          soundBytesWithoutHeader[i - HEADER_SIZE] = soundBytes[i] * factor;
     }
-    fwrite(&soundBytesWithoutHeader[0], 2, size - HEADER_SIZE, outputAppend);
+    fwrite(&soundBytesWithoutHeader[0], 1, size - HEADER_SIZE, outputAppend);
 
 
     
