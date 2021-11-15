@@ -34,38 +34,25 @@ int main(int argc, char *argv[])
     float factor = atof(argv[3]);
 
     // TODO: Copy header from input file to output file
-    uint8_t header[HEADER_SIZE];
-    fread(header, 1, HEADER_SIZE, input);
-    fwrite(&header[0], 1, HEADER_SIZE, output);
-    fclose(output);
+    uint8_t header;
+    int16_t buffer;
+    
+    // copy and write the header to the output as uint8
+    for (int i = 0; i < HEADER_SIZE; i++)
+    {
+        fread(&header, sizeof(header), 1, input);
+        fwrite(&header, sizeof(header), 1, output);
+    }
 
     // TODO: Read samples from input file and write updated data to output file
-    FILE *outputAppend = fopen(argv[2], "a");
-    if (outputAppend == NULL)
-    {
-        printf("Could not open file.\n");
-        return 1;
+    // copy and write multiplied by the factor as int16_t
+    while(fread(&buffer, sizeof(buffer), 1, input)) // fread returns false if it has reached end of file
+    {        
+        buffer *= factor;
+        fwrite(&buffer, sizeof(buffer), 1, output);
     }
-
-    fseek(input, 0L, SEEK_END);
-    long int size = ftell(input);
-    fseek(input, 0, SEEK_SET);
-    int16_t soundBytes[size];
-    int16_t soundBytesWithoutHeader[size - HEADER_SIZE];
-    fread(soundBytes, 2, size, input);
-
-    for (int i = 0; i < size; i++)
-    {
-         if (i < 44) continue;
-         soundBytesWithoutHeader[i - HEADER_SIZE] = soundBytes[i] * factor;
-    }
-    fwrite(&soundBytesWithoutHeader[0], 1, size - HEADER_SIZE, outputAppend);
-
-
-    
-    
 
     // Close files
     fclose(input);
-    fclose(outputAppend);
+    fclose(output);
 }
