@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     FILE *outfile;
     uint8_t buffer[512];
     int jpgCounter = 0;
-    char *filename = malloc(8 * sizeof(char));
+    char filename[8];
     while (fread(&buffer, sizeof(buffer), 512, infile))
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
