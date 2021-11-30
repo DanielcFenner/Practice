@@ -61,8 +61,6 @@ def main():
 def sequence_finder(dna_str, dna_sequence):
     # takes an STR and dna_sequence then returns the maximum amount of times it repeats
     consecutive_matches = 0
-    temp_consecutive_matches = 0
-    temp_string = ""
     i = 0
 
     # we go through every element in the sequence minus the length of the STR
